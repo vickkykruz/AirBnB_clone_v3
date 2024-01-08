@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""State module"""
+"""This is a scriot file that contain the State module"""
 from api.v1.views import app_views
 from flask import jsonify, abort, request, make_response
 from models import storage
@@ -10,7 +10,7 @@ from flasgger.utils import swag_from
 @app_views.route('/states', methods=['GET'], strict_slashes=False)
 @swag_from('documentation/state/get.yml', methods=['GET'])
 def get_all():
-    """ get all by id """
+    """ This is a method that get all by id """
     all_list = [obj.to_dict() for obj in storage.all(State).values()]
     return jsonify(all_list)
 
@@ -19,7 +19,7 @@ def get_all():
                  strict_slashes=False)
 @swag_from('documentation/state/get_id.yml', methods=['GET'])
 def get_method_state(state_id):
-    """ get state by id"""
+    """This is a method that get state by id"""
     state = storage.get(State, state_id)
     if state is None:
         abort(404)
@@ -30,7 +30,7 @@ def get_method_state(state_id):
                  strict_slashes=False)
 @swag_from('documentation/state/delete.yml', methods=['DELETE'])
 def del_method(state_id):
-    """ delete state by id"""
+    """This is a methid that delete state by id"""
     state = storage.get(State, state_id)
     if state is None:
         abort(404)
@@ -43,7 +43,7 @@ def del_method(state_id):
                  strict_slashes=False)
 @swag_from('documentation/state/post.yml', methods=['POST'])
 def create_obj():
-    """ create new instance """
+    """ This is a methid that create new instance """
     if not request.get_json():
         return make_response(jsonify({"error": "Not a JSON"}), 400)
     if 'name' not in request.get_json():
@@ -58,7 +58,7 @@ def create_obj():
                  strict_slashes=False)
 @swag_from('documentation/state/put.yml', methods=['PUT'])
 def post_method(state_id):
-    """ post method """
+    """This is a method that post method """
     if not request.get_json():
         return make_response(jsonify({"error": "Not a JSON"}), 400)
     obj = storage.get(State, state_id)
