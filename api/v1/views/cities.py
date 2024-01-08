@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """
-This file contains the City module
+This is a script file contains the City module
 """
+from flask import make_response, request, abort, jsonify
 from api.v1.views import app_views
-from flask import jsonify, abort, request, make_response
 from models import storage
 from models.state import State
 from models.city import City
@@ -14,7 +14,7 @@ from flasgger.utils import swag_from
                  methods=['GET'], strict_slashes=False)
 @swag_from('documentation/city/get.yml', methods=['GET'])
 def get_cities(state_id):
-    """ Gets cities for state_id """
+    """ This is a methods that gets cities for state_id """
     state = storage.get(State, state_id)
     if state is None:
         abort(404)
@@ -26,7 +26,7 @@ def get_cities(state_id):
                  strict_slashes=False)
 @swag_from('documentation/city/get_id.yml', methods=['GET'])
 def get_city(city_id):
-    """ get city by id"""
+    """ This is a mothod that get city by id"""
     city = storage.get(City, city_id)
     if city is None:
         abort(404)
@@ -37,7 +37,7 @@ def get_city(city_id):
                  strict_slashes=False)
 @swag_from('documentation/city/delete.yml', methods=['DELETE'])
 def del_city(city_id):
-    """ delete city by id"""
+    """ This is a method that delete city by id"""
     city = storage.get(City, city_id)
     if city is None:
         abort(404)
@@ -50,7 +50,7 @@ def del_city(city_id):
                  strict_slashes=False)
 @swag_from('documentation/city/post.yml', methods=['POST'])
 def create_obj_city(state_id):
-    """ create new instance """
+    """ This is a method that post/create new instance """
     state = storage.get(State, state_id)
     if state is None:
         abort(404)
@@ -70,7 +70,7 @@ def create_obj_city(state_id):
                  strict_slashes=False)
 @swag_from('documentation/city/put.yml', methods=['PUT'])
 def post_city(city_id):
-    """  """
+    """ This is amethod the return the new cities Id """
     if not request.get_json():
         return make_response(jsonify({"error": "Not a JSON"}), 400)
     obj = storage.get(City, city_id)
