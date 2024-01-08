@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" returns json statuses for app_views routes """
+""" returns json status for app_views routes of the Flask app """
 from api.v1.views import app_views
 from flask import jsonify
 

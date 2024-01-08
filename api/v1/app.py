@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-    This module contains a flask application
+    This module contains variables and functions to connect to a
+    Flask application
 """
 
 from flask import Flask, jsonify, Blueprint
@@ -17,9 +18,7 @@ app.register_blueprint(app_views, url_prefix="/api/v1")
 
 @app.teardown_appcontext
 def teardown_app(code):
-    '''
-        Handles teardown
-    '''
+    """ This function handles Teardown """
     storage.close()
 
 
