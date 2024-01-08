@@ -23,5 +23,11 @@ def teardown_app(code):
     storage.close()
 
 
+@app.errorhandler(404)
+def page_not_found(error):
+    """ Returns a JSON-formatted error response """
+    return jsonify({"error": "Not found"}), 404
+
+
 if __name__ == '__main__':
     app.run(host=host, port=port, threaded=True)
