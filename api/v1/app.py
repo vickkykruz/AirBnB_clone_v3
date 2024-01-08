@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This module contains the principal application
+This script file that contains the principal application
 """
 from models import storage
 from api.v1.views import app_views
@@ -17,21 +17,21 @@ cors = CORS(app, resources={r"/api/*": {"origins": "0.0.0.0"}})
 
 @app.teardown_appcontext
 def close_db(obj):
-    """ calls methods close() """
+    """ This is a method that calls methods close() """
     storage.close()
 
 
 @app.errorhandler(404)
 def page_not_foun(error):
-    """ Loads a custom 404 page not found """
+    """ This is a method that loads a custom 404 page not found """
     return make_response(jsonify({"error": "Not found"}), 404)
 
 
 app.config['SWAGGER'] = {
     'title': 'AirBnB clone - RESTful API',
-    'description': 'This is the api that was created for the hbnb restful api project,\
+    'description': 'This is the api that was created for the hbnb api project,\
     all the documentation will be shown below',
-    'uiversion': 3}
+    'diversion': 3}
 
 Swagger(app)
 
