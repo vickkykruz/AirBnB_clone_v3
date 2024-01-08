@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This is a script file that contains the FileStorage class
+Contains the FileStorage class
 """
 
 import json
@@ -17,8 +17,7 @@ classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
 
 
 class FileStorage:
-    """This is a class that serializes instances to a JSON file & deserializes
-    back to instances"""
+    """serializes instances to a JSON file & deserializes back to instances"""
 
     # string - path to the JSON file
     __file_path = "file.json"
@@ -26,7 +25,7 @@ class FileStorage:
     __objects = {}
 
     def all(self, cls=None):
-        """This is a method that returns the dictionary __objects"""
+        """returns the dictionary __objects"""
         if cls is not None:
             new_dict = {}
             for key, value in self.__objects.items():
@@ -36,15 +35,13 @@ class FileStorage:
         return self.__objects
 
     def new(self, obj):
-        """This is method that sets in __objects the obj with key
-        <obj class name>.id"""
+        """sets in __objects the obj with key <obj class name>.id"""
         if obj is not None:
             key = obj.__class__.__name__ + "." + obj.id
             self.__objects[key] = obj
 
     def save(self):
-        """This is a method that serializes __objects to the JSON file
-        (path: __file_path)"""
+        """serializes __objects to the JSON file (path: __file_path)"""
         json_objects = {}
         for key in self.__objects:
             json_objects[key] = self.__objects[key].to_dict(False)
@@ -52,7 +49,7 @@ class FileStorage:
             json.dump(json_objects, f)
 
     def reload(self):
-        """ This is a method deserializes the JSON file to __objects"""
+        """deserializes the JSON file to __objects"""
         try:
             with open(self.__file_path, 'r') as f:
                 jo = json.load(f)
@@ -62,7 +59,7 @@ class FileStorage:
             pass
 
     def delete(self, obj=None):
-        """ This is a method delete obj from __objects if it’s inside"""
+        """delete obj from __objects if it’s inside"""
         if obj is not None:
             key = obj.__class__.__name__ + '.' + obj.id
             if key in self.__objects:
@@ -73,8 +70,8 @@ class FileStorage:
         self.reload()
 
     def get(self, cls, id):
-        """ This is the method that retrieves the data """
-        if cls in classes.values() and id and type(id) is str:
+        """ retrieves """
+        if cls in classes.values() and id and type(id) == str:
             d_obj = self.all(cls)
             for key, value in d_obj.items():
                 if key.split(".")[1] == id:
@@ -82,7 +79,7 @@ class FileStorage:
         return None
 
     def count(self, cls=None):
-        """ This is a method that counts """
+        """ counts """
         data = self.all(cls)
         if cls in classes.values():
             data = self.all(cls)
