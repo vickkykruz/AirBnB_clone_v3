@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """
-This file contains the Place module
+This is a script file contains the Place module
 """
+from flask import make_response, abort, request, jsonify
 from api.v1.views import app_views
-from flask import jsonify, abort, request, make_response
 from models import storage
 from models.place import Place
 from models.city import City
@@ -17,7 +17,7 @@ from flasgger.utils import swag_from
                  methods=['GET'], strict_slashes=False)
 @swag_from('documentation/places/get.yml', methods=['GET'])
 def get_all_places(city_id):
-    """ list cities by id """
+    """ This is a method that list cities by id """
     city = storage.get(City, city_id)
     if city is None:
         abort(404)
@@ -29,7 +29,7 @@ def get_all_places(city_id):
                  strict_slashes=False)
 @swag_from('documentation/places/get_id.yml', methods=['GET'])
 def get_place(place_id):
-    """ get place by id """
+    """ This is a methid that get place by id """
     place = storage.get(Place, place_id)
     if place is None:
         abort(404)
@@ -40,7 +40,7 @@ def get_place(place_id):
                  strict_slashes=False)
 @swag_from('documentation/places/delete.yml', methods=['DELETE'])
 def del_place(place_id):
-    """ delete place by id """
+    """ This is a method that delete place by id """
     place = storage.get(Place, place_id)
     if place is None:
         abort(404)
@@ -53,7 +53,7 @@ def del_place(place_id):
                  strict_slashes=False)
 @swag_from('documentation/places/post.yml', methods=['POST'])
 def create_obj_place(city_id):
-    """ create new instance """
+    """ This is a method that create new instance """
     city = storage.get(City, city_id)
     if city is None:
         abort(404)
@@ -77,7 +77,7 @@ def create_obj_place(city_id):
                  strict_slashes=False)
 @swag_from('documentation/places/put.yml', methods=['PUT'])
 def post_place(place_id):
-    """ update by id """
+    """ This is method that update by id """
     if not request.get_json():
         return make_response(jsonify({"error": "Not a JSON"}), 400)
     obj = storage.get(Place, place_id)
