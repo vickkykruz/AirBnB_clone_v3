@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """
-This file contains the Amenity module
+This is a script file contains the Amenity module
 """
+from flask import make_response, abort, request, jsonify
 from api.v1.views import app_views
-from flask import jsonify, abort, request, make_response
 from models import storage
 from models.amenity import Amenity
 from flasgger.utils import swag_from
@@ -12,7 +12,7 @@ from flasgger.utils import swag_from
 @app_views.route('/amenities', methods=['GET'], strict_slashes=False)
 @swag_from('documentation/amenity/get.yml', methods=['GET'])
 def get_all_amenities():
-    """ get amenities by id """
+    """ This is a method that get amenities by id """
     all_list = [obj.to_dict() for obj in storage.all(Amenity).values()]
     return jsonify(all_list)
 
@@ -21,7 +21,7 @@ def get_all_amenities():
                  strict_slashes=False)
 @swag_from('documentation/amenity/get_id.yml', methods=['GET'])
 def get_amenity(amenity_id):
-    """ get amenity by id"""
+    """ This is a method that get amenity by id"""
     amenity = storage.get(Amenity, amenity_id)
     if amenity is None:
         abort(404)
@@ -32,7 +32,7 @@ def get_amenity(amenity_id):
                  strict_slashes=False)
 @swag_from('documentation/amenity/delete.yml', methods=['DELETE'])
 def del_amenity(amenity_id):
-    """ delete amenity by id"""
+    """ This is amethod that delete amenity by id"""
     amenity = storage.get(Amenity, amenity_id)
     if amenity is None:
         abort(404)
@@ -45,7 +45,7 @@ def del_amenity(amenity_id):
                  strict_slashes=False)
 @swag_from('documentation/amenity/post.yml', methods=['POST'])
 def create_obj_amenity():
-    """ create new instance """
+    """ This is a method that create new instance """
     if not request.get_json():
         return make_response(jsonify({"error": "Not a JSON"}), 400)
     if 'name' not in request.get_json():
@@ -60,7 +60,7 @@ def create_obj_amenity():
                  strict_slashes=False)
 @swag_from('documentation/amenity/put.yml', methods=['PUT'])
 def post_amenity(amenity_id):
-    """  """
+    """ This is a method that post a new amenity """
     if not request.get_json():
         return make_response(jsonify({"error": "Not a JSON"}), 400)
     obj = storage.get(Amenity, amenity_id)
